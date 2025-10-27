@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+langchain>=0.0.200
+transformers>=4.30.0
+sentence-transformers>=2.2.2
+faiss-cpu
+pydantic
+torch
+langchain-community
+langchain-core
