@@ -33,6 +33,7 @@ It combines speech recognition, retrieval-based reasoning, and local language mo
 
 ## Folder Structure
 
+```
 RAG Tutor/
 │
 ├── backend/
@@ -58,7 +59,7 @@ RAG Tutor/
 │
 └── README.md
 
-text
+```
 
 ---
 
