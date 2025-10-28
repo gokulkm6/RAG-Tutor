@@ -1,24 +1,24 @@
-# 🧠 RAG Tutor — Offline Voice-Interactive AI Learning Assistant
+# RAG Tutor
 
 RAG Tutor is a locally deployable Retrieval-Augmented Generation (RAG) based voice-enabled tutor that uses LangChain, Hugging Face, and FAISS to answer questions from your own documents — completely offline.  
 It combines speech recognition, retrieval-based reasoning, and local language model inference to create an interactive tutoring experience.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🎙️ Voice Interaction — Speak your query; the AI listens and replies vocally.  
-- 🧩 RAG Pipeline (Offline) — Retrieves relevant context from your local documents.  
-- 💬 LLM-Powered Tutoring — Uses a lightweight summarization model (BART) for response generation.  
-- 💾 Local FAISS Vector Store — No cloud dependency.  
-- 😄 Emotion-Driven Mascot — Responds visually with expressive emotions.  
-- ⚡ FastAPI Backend + React Frontend — Modern, modular, and easily deployable.  
-- 🧠 Embeddings via HuggingFace — SentenceTransformer model for semantic similarity.  
-- 🔒 Fully Offline — Ideal for restricted environments or educational setups.
+- Voice Interaction — Speak your query; the AI listens and replies vocally.  
+- RAG Pipeline — Retrieves relevant context from your local documents.  
+- LLM-Powered Tutoring — Uses a lightweight summarization model (BART) for response generation.  
+- Local FAISS Vector Store — No cloud dependency.  
+- Emotion-Driven Mascot — Responds visually with expressive emotions.  
+- FastAPI Backend + React Frontend — Modern, modular, and easily deployable.  
+- Embeddings via HuggingFace — SentenceTransformer model for semantic similarity.  
+- Fully Offline — Ideal for restricted environments or educational setups.
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-------------|
@@ -31,7 +31,7 @@ It combines speech recognition, retrieval-based reasoning, and local language mo
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 RAG Tutor/
 │
@@ -62,9 +62,9 @@ text
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
-### 1️⃣ Backend Setup
+### 1️. Backend Setup
 cd backend
 python -m venv venv
 venv\Scriptsctivate # On Linux: source venv/bin/activate
@@ -85,7 +85,7 @@ sentence-transformers
 
 text
 
-### 2️⃣ Add Documents
+### 2. Add Documents
 Place your `.txt` files inside:
 backend/docs/
 
@@ -97,7 +97,7 @@ backend/docs/langchain_overview.txt
 
 text
 
-### 3️⃣ Build the Vector Store
+### 3. Build the Vector Store
 python backend/app/vectorstore/build_vectorstore.py
 
 text
@@ -107,7 +107,7 @@ FAISS index saved at: backend/app/vectorstore/faiss_index
 
 text
 
-### 4️⃣ Start Backend Server
+### 4. Start Backend Server
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 text
@@ -122,7 +122,7 @@ curl -X POST "http://127.0.0.1:8000/chat"
 
 text
 
-### 5️⃣ Frontend Setup
+### 5. Frontend Setup
 cd frontend
 npm install
 npm start
@@ -134,45 +134,7 @@ http://localhost:3000
 
 ---
 
-## 🧩 Example Query
-
-You: “What is machine learning?”  
-Tutor: “Machine learning is a subfield of AI that enables systems to learn patterns from data and make predictions without explicit programming.”
-
----
-
-## 🛠️ Troubleshooting
-
-| Error | Cause | Fix |
-|-------|--------|-----|
-| Docs folder not found | Missing or wrong path | Ensure backend/docs/ exists and contains .txt files |
-| could not open index.faiss for reading | FAISS index missing | Re-run build_vectorstore.py |
-| 'VectorStoreRetriever' object has no attribute get_relevant_documents | Wrong retriever usage | Use retriever.get_relevant_documents(query) |
-| 'HuggingFacePipeline' object is not callable | Direct model call issue | Use llm.invoke(prompt) instead |
-| Output contains leftover text | Old prompt template | Update answer_query_offline() with cleaned prompt |
-| Frontend empty output | Backend returned empty JSON | Check if /chat route returns text properly |
-| TypeError: Failed to fetch | CORS issue | Add FastAPI CORS middleware for localhost:3000 |
-
----
-
-## 🧠 Optimization & Edge Deployment
-
-- Model Quantization: Use ONNX or int8 quantization for edge devices.  
-- Linux Cloud Deployment:  
-  - Install OpenCV manually if dependency conflicts occur:  
-    ```
-    sudo apt install libgl1
-    ```
-  - Use gunicorn + uvicorn.workers.UvicornWorker for production.  
-- Offline Mode:  
-  Pre-download all models and embeddings using:
-transformers-cli download
-
-text
-
----
-
-## 🧩 API Schema
+## API Schema
 
 POST /chat
 
@@ -194,7 +156,7 @@ text
 
 ---
 
-## 🧠 Key Learnings & Challenges
+## Key Learnings & Challenges
 
 ### Problem Understanding
 Building a self-contained AI tutor that interacts using voice and contextually reasons from local documents.
@@ -214,13 +176,6 @@ Building a self-contained AI tutor that interacts using voice and contextually r
 ### Challenges & Learnings
 - Model compatibility fixed via HuggingFacePipeline.invoke  
 - CORS and 422 schema mismatches resolved in FastAPI  
-- Prompt leakage removed via cleaner PromptTemplate  
-- Manual OpenCV fix on Linux (libGL.so missing)  
-
-### Optimization for Edge
-- Convert embeddings to HNSWlib or SQLite vector store.  
-- Replace bart-large-cnn with t5-small or flan-t5-base for low-memory systems.  
-- Bundle model weights locally using transformers-cli download.
 
 ---
 
